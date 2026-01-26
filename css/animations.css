@@ -1,0 +1,381 @@
+/* ================================
+   Keyframe Animations
+   ================================ */
+
+/* Fade In Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Shake */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Slide Out Right */
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+}
+
+/* Fade Out */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* ================================
+   Animation Classes
+   ================================ */
+
+/* Task Card Entrance Animation */
+.task-card {
+    animation: slideInRight 0.4s ease-out;
+}
+
+.task-card:nth-child(even) {
+    animation: slideInLeft 0.4s ease-out;
+}
+
+/* Task Card Removal Animation */
+.task-card.removing {
+    animation: slideOutRight 0.4s ease-out forwards;
+}
+
+/* Modal Entrance */
+.modal-overlay.active .modal-content {
+    animation: scaleIn 0.3s ease-out;
+}
+
+/* Button Hover Animations */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Icon Button Rotation on Hover */
+.icon-btn:hover i {
+    animation: pulse 0.5s ease;
+}
+
+/* Loading State */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--color-accent-primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Checkbox Animation */
+.task-checkbox .checkmark {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.task-checkbox input:checked ~ .checkmark {
+    transform: scale(1.1);
+}
+
+.task-checkbox input:checked ~ .checkmark::after {
+    animation: checkmarkBounce 0.4s ease-out;
+}
+
+@keyframes checkmarkBounce {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Stats Counter Animation */
+.stat-number {
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.stat-number.updating {
+    animation: pulse 0.5s ease;
+}
+
+/* Empty State Animation */
+.empty-state {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.empty-state i {
+    animation: bounceIn 0.8s ease-out 0.2s both;
+}
+
+/* Form Input Focus Animation */
+input:focus,
+textarea:focus,
+select:focus {
+    animation: inputFocus 0.3s ease-out;
+}
+
+@keyframes inputFocus {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Theme Toggle Animation */
+#themeToggle i {
+    transition: transform 0.5s ease;
+}
+
+body.dark-theme #themeToggle i {
+    transform: rotate(360deg);
+}
+
+/* Category Tag Hover */
+.task-category {
+    transition: all 0.3s ease;
+}
+
+.task-category:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Priority Badge Animation */
+.task-priority {
+    transition: all 0.3s ease;
+}
+
+.task-priority::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 4px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.task-priority.high::before {
+    background: var(--color-priority-high);
+}
+
+.task-priority.medium::before {
+    background: var(--color-priority-medium);
+}
+
+.task-priority.low::before {
+    background: var(--color-priority-low);
+}
+
+/* Success Flash Animation */
+@keyframes successFlash {
+    0%, 100% {
+        background: var(--color-bg-secondary);
+    }
+    50% {
+        background: rgba(16, 185, 129, 0.1);
+    }
+}
+
+.success-flash {
+    animation: successFlash 0.6s ease-out;
+}
+
+/* Error Shake Animation */
+.error-shake {
+    animation: shake 0.5s ease-out;
+}
+
+/* Stagger Animation for Task Lists */
+.task-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.task-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.task-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.task-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.task-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ================================
+   Hover Effects
+   ================================ */
+
+/* Card Lift Effect */
+.task-card {
+    will-change: transform;
+}
+
+/* Button Press Effect */
+.btn:active,
+.icon-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Smooth Color Transitions */
+* {
+    transition-property: color, background-color, border-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
+
+/* Exclude position and transform from default transitions */
+*:not(.task-card):not(.btn):not(.icon-btn) {
+    transition-property: color, background-color, border-color;
+}
