@@ -204,6 +204,33 @@ const AppController = {
                 UIManager.showTaskModal();
             }
         });
+
+        // Event delegation for task cards (checkboxes, edit, delete buttons)
+        document.getElementById('tasksContainer').addEventListener('click', (e) => {
+            // Handle checkbox clicks
+            if (e.target.matches('.task-checkbox input[type="checkbox"]')) {
+                const taskId = e.target.getAttribute('data-task-id');
+                if (taskId) {
+                    this.toggleComplete(taskId);
+                }
+            }
+            
+            // Handle edit button clicks
+            if (e.target.closest('.edit-task-btn')) {
+                const taskId = e.target.closest('.edit-task-btn').getAttribute('data-task-id');
+                if (taskId) {
+                    this.editTask(taskId);
+                }
+            }
+            
+            // Handle delete button clicks
+            if (e.target.closest('.delete-task-btn')) {
+                const taskId = e.target.closest('.delete-task-btn').getAttribute('data-task-id');
+                if (taskId) {
+                    this.deleteTask(taskId);
+                }
+            }
+        });
     },
 
     /**
@@ -517,6 +544,3 @@ const AppController = {
 document.addEventListener('DOMContentLoaded', () => {
     AppController.init();
 });
-
-// Expose AppController methods globally for inline onclick handlers
-window.AppController = AppController;

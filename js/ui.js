@@ -72,7 +72,7 @@ const UIManager = {
         card.innerHTML = `
             <div class="task-checkbox">
                 <input type="checkbox" ${task.completed ? 'checked' : ''} 
-                       onchange="AppController.toggleComplete('${task.id}')">
+                       data-task-id="${task.id}">
                 <span class="checkmark"></span>
             </div>
 
