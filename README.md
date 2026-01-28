@@ -3,7 +3,7 @@
 A professional, feature-rich task management web application built with vanilla JavaScript, HTML, and CSS. TaskFlow demonstrates mastery of CRUD operations, data persistence with localStorage, and modern web development practices.
 
 ![TaskFlow Preview](assets/preview.png)
-*Screenshot placeholder - add your own screenshot here*
+*Screenshot placeholder
 
 ## Live Demo
 
@@ -632,10 +632,10 @@ UIManager (renders updated view)
 ## 🌐 Browser Compatibility
 
 ### Tested Browsers
-- ✅ Chrome/Edge 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Opera 76+
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Opera 76+
 
 ### Required Features
 - CSS Grid and Flexbox
