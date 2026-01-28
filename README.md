@@ -791,7 +791,7 @@ SOFTWARE.
 **Sonia Amanyi**
 - Portfolio: [myfuturewebsite.com](#)
 - GitHub: [@Jima-Son](https://github.com/Jima-Son)
-- LinkedIn: [Your Name](https://www.linkedin.com/in/sonia-amanyi-9a3ab5308/)
+- LinkedIn: [Sonia Amanyi](https://www.linkedin.com/in/sonia-amanyi-9a3ab5308/)
 - Email: pwyahahiri@gmail.com
 
 ---
