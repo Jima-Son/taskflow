@@ -120,7 +120,11 @@ const FocusController = {
             });
             this.completedFocusSessions++;
             this.renderReport();
+        }
+
+        if (!skipped) {
             this.playAlarm();
+            this.showToast(this.completionMessage());
         }
 
         this.updateSessionDots();
@@ -132,6 +136,20 @@ const FocusController = {
         } else {
             this.setMode('focus', this.settings.autoStartFocus);
         }
+    },
+
+    completionMessage() {
+        if (this.mode === 'focus') return 'Nice work — focus session complete. Time for a break.';
+        return this.mode === 'short' ? 'Short break over — back to it.' : 'Long break over — back to it.';
+    },
+
+    showToast(message) {
+        const toast = document.getElementById('sessionToast');
+        if (!toast) return;
+        toast.querySelector('.toast-message').textContent = message;
+        toast.classList.add('show');
+        clearTimeout(this._toastTimeout);
+        this._toastTimeout = setTimeout(() => toast.classList.remove('show'), 6000);
     },
 
     playAlarm() {
@@ -273,6 +291,10 @@ const FocusController = {
             this.settings.ambientVolume = v;
             AmbientSound.setVolume(v);
             StorageManager.updateFocusSetting('ambientVolume', v);
+        });
+
+        document.getElementById('toastClose').addEventListener('click', () => {
+            document.getElementById('sessionToast').classList.remove('show');
         });
 
         document.getElementById('themeToggle').addEventListener('click', () => {

@@ -128,6 +128,12 @@ Purpose: Focus mode — a pomodoro-style timer built on top of TaskFlow's task l
 
     <audio id="alarmSound" src="audio/alarm.mp3" preload="auto"></audio>
 
+    <div class="session-toast" id="sessionToast">
+        <i class="fas fa-circle-check"></i>
+        <span class="toast-message"></span>
+        <button class="toast-close" id="toastClose" aria-label="Dismiss"><i class="fas fa-times"></i></button>
+    </div>
+
     <script src="js/storage.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/ambient.js"></script>

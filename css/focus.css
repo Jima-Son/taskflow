@@ -266,6 +266,59 @@
     color: var(--color-text-tertiary);
 }
 
+.session-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent-primary);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    max-width: 320px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--color-text-primary);
+    transform: translateY(16px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    z-index: 1000;
+}
+.session-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+.session-toast i.fa-circle-check {
+    color: var(--color-accent-primary);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.toast-message { flex: 1; line-height: 1.4; }
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+.toast-close:hover { color: var(--color-text-primary); }
+
+@media (max-width: 640px) {
+    .session-toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
+    }
+}
+
 /* Break mode tint */
 body.mode-short .ring-progress, body.mode-long .ring-progress { stroke: var(--color-accent-secondary); }
 
