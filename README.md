@@ -1,13 +1,10 @@
-# TaskFlow - Modern Task Manager
+# TaskFlow 
 
 A professional, feature-rich task management web application built with vanilla JavaScript, HTML, and CSS. TaskFlow demonstrates mastery of CRUD operations, data persistence with localStorage, and modern web development practices.
 
-![TaskFlow Preview](assets/preview.png)
-*Screenshot placeholder
-
 ## Live Demo
 
-[View Live Demo](#) *(Add your deployed link here)*
+[View Live Demo](#) 
 
 ## Table of Contents
 
@@ -161,32 +158,6 @@ This project serves as a portfolio piece demonstrating:
    - Navigate to `http://localhost:8000` (if using server)
    - Start creating tasks!
 
-### No Build Process Required
-This is a vanilla JavaScript application with no dependencies or build tools. All libraries are loaded via CDN.
-
----
-
-## 📁 Project Structure
-
-```
-taskflow/
-│
-├── index.html              # Main HTML file
-│
-├── css/
-│   ├── style.css          # Main styles with CSS variables
-│   └── animations.css     # Animation keyframes and classes
-│
-├── js/
-│   ├── storage.js         # LocalStorage operations (CRUD)
-│   ├── ui.js              # UI rendering and DOM manipulation
-│   └── app.js             # Main application controller
-│
-├── assets/
-│   └── preview.png        # Screenshot for README
-│
-└── README.md              # This file
-```
 
 ### File Responsibilities
 
