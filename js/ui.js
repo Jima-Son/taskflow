@@ -481,3 +481,12 @@ const UIManager = {
         }
     }
 };
+
+// Mobile nav toggle — shared across all pages (Tasks / Focus / Notes)
+document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.getElementById('navToggle');
+    const appNav = document.getElementById('appNav');
+    if (navToggle && appNav) {
+        navToggle.addEventListener('click', () => appNav.classList.toggle('open'));
+    }
+});

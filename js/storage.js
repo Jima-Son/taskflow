@@ -10,7 +10,9 @@ const STORAGE_KEYS = {
     CATEGORIES: 'taskflow_categories',
     SETTINGS: 'taskflow_settings',
     FOCUS_SETTINGS: 'taskflow_focus_settings',
-    FOCUS_SESSIONS: 'taskflow_focus_sessions'
+    FOCUS_SESSIONS: 'taskflow_focus_sessions',
+    NOTES: 'taskflow_notes',
+    PREMIUM: 'taskflow_premium'
 };
 
 // Default Focus/Pomodoro Settings
@@ -482,6 +484,76 @@ const StorageManager = {
             return this.saveFocusSessions(sessions);
         } catch (error) {
             console.error('Error logging focus session:', error);
+            return false;
+        }
+    },
+
+    /**
+     * NOTES - CRUD Operations
+     */
+    getNotes() {
+        try {
+            const notes = localStorage.getItem(STORAGE_KEYS.NOTES);
+            return notes ? JSON.parse(notes) : [];
+        } catch (error) {
+            console.error('Error reading notes:', error);
+            return [];
+        }
+    },
+
+    saveNotes(notes) {
+        try {
+            localStorage.setItem(STORAGE_KEYS.NOTES, JSON.stringify(notes));
+            return true;
+        } catch (error) {
+            console.error('Error saving notes:', error);
+            return false;
+        }
+    },
+
+    addNote(note) {
+        try {
+            const notes = this.getNotes();
+            notes.unshift({
+                id: `note_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                text: note.text,
+                taskId: note.taskId || null,
+                createdAt: new Date().toISOString()
+            });
+            return this.saveNotes(notes);
+        } catch (error) {
+            console.error('Error adding note:', error);
+            return false;
+        }
+    },
+
+    deleteNote(noteId) {
+        try {
+            const notes = this.getNotes().filter(n => n.id !== noteId);
+            return this.saveNotes(notes);
+        } catch (error) {
+            console.error('Error deleting note:', error);
+            return false;
+        }
+    },
+
+    /**
+     * PREMIUM - local-only feature gate (no real payment wired up yet)
+     */
+    isPremium() {
+        try {
+            return localStorage.getItem(STORAGE_KEYS.PREMIUM) === 'true';
+        } catch (error) {
+            return false;
+        }
+    },
+
+    setPremium(value) {
+        try {
+            localStorage.setItem(STORAGE_KEYS.PREMIUM, value ? 'true' : 'false');
+            return true;
+        } catch (error) {
+            console.error('Error setting premium flag:', error);
             return false;
         }
     },

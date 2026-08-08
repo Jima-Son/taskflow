@@ -31,9 +31,10 @@ const FocusController = {
         document.getElementById('longBreakMinutes').value = this.settings.longBreakMinutes;
         document.getElementById('sessionsBeforeLongBreak').value = this.settings.sessionsBeforeLongBreak;
         document.getElementById('ambientVolume').value = this.settings.ambientVolume;
-        document.querySelectorAll('.ambient-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.sound === this.settings.ambientSound);
-        });
+
+        const select = document.getElementById('ambientSelect');
+        select.innerHTML = AMBIENT_TRACKS.map(t => `<option value="${t.id}">${t.label}</option>`).join('');
+        select.value = this.settings.ambientSound;
     },
 
     populateTaskSelect() {
@@ -134,7 +135,18 @@ const FocusController = {
     },
 
     playAlarm() {
-        // Simple two-tone chime via Web Audio API — no external sound file needed
+        const audioEl = document.getElementById('alarmSound');
+        audioEl.currentTime = 0;
+        audioEl.volume = 0.6;
+        const playPromise = audioEl.play();
+        if (playPromise) {
+            playPromise.catch(() => this._playAlarmFallback());
+        }
+        audioEl.onerror = () => this._playAlarmFallback();
+    },
+
+    _playAlarmFallback() {
+        // Simple two-tone chime via Web Audio API — used only if the real alarm file fails to load
         const AC = window.AudioContext || window.webkitAudioContext;
         const ctx = new AC();
         [880, 1108].forEach((freq, i) => {
@@ -250,14 +262,10 @@ const FocusController = {
             document.getElementById(id).addEventListener('change', () => this.saveSettingsFromInputs());
         });
 
-        document.querySelectorAll('.ambient-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.ambient-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                this.settings.ambientSound = btn.dataset.sound;
-                StorageManager.updateFocusSetting('ambientSound', btn.dataset.sound);
-                if (this.running) AmbientSound.play(btn.dataset.sound, this.settings.ambientVolume);
-            });
+        document.getElementById('ambientSelect').addEventListener('change', (e) => {
+            this.settings.ambientSound = e.target.value;
+            StorageManager.updateFocusSetting('ambientSound', e.target.value);
+            if (this.running) AmbientSound.play(e.target.value, this.settings.ambientVolume);
         });
 
         document.getElementById('ambientVolume').addEventListener('input', (e) => {
