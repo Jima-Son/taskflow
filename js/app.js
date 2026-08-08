@@ -366,6 +366,15 @@ const AppController = {
             this.loadData();
             this.applyFiltersAndSort();
             UIManager.updateStats(this.state.currentTasks);
+
+            const task = StorageManager.getTaskById(taskId);
+            if (task) {
+                if (task.completed) {
+                    UIManager.showNotification(`"${task.title}" completed — nice work!`, 'success');
+                } else {
+                    UIManager.showNotification(`"${task.title}" marked as pending`, 'info');
+                }
+            }
         }
     },
 
