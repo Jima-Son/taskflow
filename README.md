@@ -2,6 +2,8 @@
 
 A professional, feature-rich task management web application built with vanilla JavaScript, HTML, and CSS. TaskFlow demonstrates mastery of CRUD operations, data persistence with localStorage, and modern web development practices.
 
+I originally built this to keep my own list straight — I'm ADHD and a plain to-do app that just sits there wasn't cutting it. The Focus mode came later: I built a version of it for my sister as a focus clock to help her keep tabs on her goals and actually finish what she started, and it stuck around because it's simple to use and doesn't feel like another app demanding attention — just a calm timer and a task, nothing else competing for your focus.
+
 ## Live Demo
 
 [View Live Demo](#) 
@@ -70,6 +72,16 @@ This project serves as a portfolio piece demonstrating:
   - Import data from JSON file
   - Clear all completed tasks in one click
   - Data persists across browser sessions
+
+### Focus Mode (new)
+
+Inspired by Pomofocus and lifeat.io, but built to connect directly to TaskFlow's own task list rather than being a separate tool.
+
+- Pomodoro-style timer with focus / short break / long break cycles, all lengths customizable
+- Pick any open task from your list to attach the session to — the timer shows what you're actually working on
+- Calm background sound (rain, low hum, or waves) generated entirely with the Web Audio API — no external audio files to host or license
+- Session history log with a 7-day focus chart and daily/weekly totals, so progress is visible over time, not just in the moment
+- Same localStorage architecture as the rest of the app — no new dependencies
 
 - **User Experience**
   - 🌓 Dark/Light theme toggle
@@ -783,7 +795,7 @@ SOFTWARE.
 - **Files**: 6 (HTML, CSS, JS)
 - **External Dependencies**: 4 (all via CDN)
 - **Browser Support**: Modern browsers (ES6+)
-- **Development Time**: 3-5 days
+- **Development Time**: 4-8 days
 - **Status**: ✅ Production Ready
 
 ---
@@ -792,4 +804,4 @@ SOFTWARE.
 
 ---
 
-*Last Updated: January 2026*
+*Last Updated: july 2026*
