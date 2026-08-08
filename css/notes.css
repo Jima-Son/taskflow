@@ -1,0 +1,156 @@
+.notes-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    align-items: start;
+}
+@media (max-width: 860px) {
+    .notes-layout { grid-template-columns: 1fr; }
+}
+
+.note-composer, .notes-list-wrap {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+}
+
+.composer-top { margin-bottom: var(--spacing-sm); }
+.composer-top label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+}
+#noteTaskSelect {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+#noteText {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+    padding: 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+.composer-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+#micBtn.listening {
+    color: #fff;
+    background: var(--color-danger, #ef4444);
+    border-color: var(--color-danger, #ef4444);
+}
+
+.mic-status {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-accent-primary);
+    min-height: 1em;
+}
+.speech-unsupported {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--color-text-tertiary);
+}
+
+.notes-list-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--spacing-md);
+}
+.notes-list-head h2 { font-family: var(--font-display); font-size: 1.2rem; }
+.note-count { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-text-tertiary); }
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-height: 560px;
+    overflow-y: auto;
+}
+
+.note-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    background: var(--color-bg-primary);
+}
+.note-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+.note-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-tertiary);
+}
+.note-tag {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-accent-primary);
+    border: 1px solid var(--color-accent-primary);
+    border-radius: var(--radius-sm);
+    padding: 2px 6px;
+}
+.note-text { font-size: 0.92rem; line-height: 1.5; white-space: pre-wrap; }
+.note-actions { display: flex; gap: 6px; }
+.note-actions button {
+    background: none;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 4px 6px;
+}
+.note-actions button:hover { color: var(--color-text-primary); }
+.note-actions button.locked { opacity: 0.4; cursor: not-allowed; }
+.note-actions button.locked:hover { color: var(--color-text-tertiary); }
+
+.premium-card {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-lg);
+    background: var(--color-bg-secondary);
+    border: 1px dashed var(--color-accent-primary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+}
+.premium-card.hidden { display: none; }
+.premium-info { display: flex; gap: 12px; align-items: flex-start; }
+.premium-info i { color: var(--color-accent-primary); font-size: 1.3rem; margin-top: 2px; }
+.premium-info strong { display: block; font-family: var(--font-display); margin-bottom: 4px; }
+.premium-info p { font-size: 0.85rem; color: var(--color-text-secondary); max-width: 46ch; }
+
+@media (max-width: 640px) {
+    .premium-card { flex-direction: column; align-items: flex-start; }
+}
