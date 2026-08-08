@@ -476,6 +476,7 @@ body {
 .task-header {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
 }
@@ -747,6 +748,29 @@ textarea {
     .control-group .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    /* Task cards: move edit/delete onto their own row instead of a
+       squeezed third grid column, which was pushing them out of view
+       (and clipping them, since .task-card has overflow: hidden). */
+    .task-card {
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "checkbox content"
+            "actions  actions";
+        row-gap: var(--spacing-sm);
+    }
+    .task-checkbox { grid-area: checkbox; }
+    .task-content { grid-area: content; }
+    .task-actions {
+        grid-area: actions;
+        justify-content: flex-end;
+        padding-top: var(--spacing-sm);
+        border-top: 1px solid var(--color-border);
+    }
+    .task-actions .icon-btn {
+        width: 44px;
+        height: 44px;
     }
 }
 
