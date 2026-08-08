@@ -8,7 +8,21 @@
 const STORAGE_KEYS = {
     TASKS: 'taskflow_tasks',
     CATEGORIES: 'taskflow_categories',
-    SETTINGS: 'taskflow_settings'
+    SETTINGS: 'taskflow_settings',
+    FOCUS_SETTINGS: 'taskflow_focus_settings',
+    FOCUS_SESSIONS: 'taskflow_focus_sessions'
+};
+
+// Default Focus/Pomodoro Settings
+const DEFAULT_FOCUS_SETTINGS = {
+    focusMinutes: 25,
+    shortBreakMinutes: 5,
+    longBreakMinutes: 15,
+    sessionsBeforeLongBreak: 4,
+    ambientSound: 'none',   // 'none' | 'rain' | 'hum' | 'waves'
+    ambientVolume: 0.25,
+    autoStartBreaks: false,
+    autoStartFocus: false
 };
 
 // Default Categories
@@ -72,6 +86,16 @@ const StorageManager = {
             // Initialize settings if not exist
             if (!localStorage.getItem(STORAGE_KEYS.SETTINGS)) {
                 this.saveSettings(DEFAULT_SETTINGS);
+            }
+
+            // Initialize focus settings if not exist
+            if (!localStorage.getItem(STORAGE_KEYS.FOCUS_SETTINGS)) {
+                this.saveFocusSettings(DEFAULT_FOCUS_SETTINGS);
+            }
+
+            // Initialize focus session log if not exist
+            if (!localStorage.getItem(STORAGE_KEYS.FOCUS_SESSIONS)) {
+                this.saveFocusSessions([]);
             }
 
             console.log('Storage initialized successfully');
@@ -361,6 +385,103 @@ const StorageManager = {
             return this.saveSettings(settings);
         } catch (error) {
             console.error('Error updating setting:', error);
+            return false;
+        }
+    },
+
+    /**
+     * FOCUS / POMODORO - Settings & Session Log
+     */
+
+    /**
+     * Get focus (pomodoro) settings
+     * @returns {Object} - Focus settings object
+     */
+    getFocusSettings() {
+        try {
+            const settings = localStorage.getItem(STORAGE_KEYS.FOCUS_SETTINGS);
+            return settings ? { ...DEFAULT_FOCUS_SETTINGS, ...JSON.parse(settings) } : DEFAULT_FOCUS_SETTINGS;
+        } catch (error) {
+            console.error('Error reading focus settings:', error);
+            return DEFAULT_FOCUS_SETTINGS;
+        }
+    },
+
+    /**
+     * Save focus (pomodoro) settings
+     * @param {Object} settings
+     * @returns {boolean}
+     */
+    saveFocusSettings(settings) {
+        try {
+            localStorage.setItem(STORAGE_KEYS.FOCUS_SETTINGS, JSON.stringify(settings));
+            return true;
+        } catch (error) {
+            console.error('Error saving focus settings:', error);
+            return false;
+        }
+    },
+
+    /**
+     * Update one focus setting
+     * @param {string} key
+     * @param {*} value
+     * @returns {boolean}
+     */
+    updateFocusSetting(key, value) {
+        const settings = this.getFocusSettings();
+        settings[key] = value;
+        return this.saveFocusSettings(settings);
+    },
+
+    /**
+     * Get all logged focus sessions
+     * @returns {Array}
+     */
+    getFocusSessions() {
+        try {
+            const sessions = localStorage.getItem(STORAGE_KEYS.FOCUS_SESSIONS);
+            return sessions ? JSON.parse(sessions) : [];
+        } catch (error) {
+            console.error('Error reading focus sessions:', error);
+            return [];
+        }
+    },
+
+    /**
+     * Save all focus sessions
+     * @param {Array} sessions
+     * @returns {boolean}
+     */
+    saveFocusSessions(sessions) {
+        try {
+            localStorage.setItem(STORAGE_KEYS.FOCUS_SESSIONS, JSON.stringify(sessions));
+            return true;
+        } catch (error) {
+            console.error('Error saving focus sessions:', error);
+            return false;
+        }
+    },
+
+    /**
+     * Log a completed focus session (only completed FOCUS blocks count toward reports,
+     * breaks are not logged as focus time)
+     * @param {Object} session - { taskId, taskTitle, minutes, completedAt }
+     * @returns {boolean}
+     */
+    logFocusSession(session) {
+        try {
+            const sessions = this.getFocusSessions();
+            sessions.push({
+                id: `focus_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                taskId: session.taskId || null,
+                taskTitle: session.taskTitle || 'Unassigned',
+                minutes: session.minutes,
+                completedAt: session.completedAt || new Date().toISOString()
+            });
+            return this.saveFocusSessions(sessions);
+        } catch (error) {
+            console.error('Error logging focus session:', error);
             return false;
         }
     },
