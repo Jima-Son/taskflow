@@ -14,7 +14,7 @@ I originally built this to keep my own list straight — I'm ADHD and a plain to
 <img width="470" height="377" alt="Screenshot 2026-08-08 121947" src="https://github.com/user-attachments/assets/0cc5a6af-027f-4d6b-baa2-efe971cbbf0d" />
 
 <img width="642" height="376" alt="image" src="https://github.com/user-attachments/assets/31d82445-cdbf-4784-9e31-685b7531c279" />
-<img width="1005" height="2048" alt="image" src="https://github.com/user-attachments/assets/36d9ef67-6719-4eb0-90ad-a5ae1fc660c9" />
+<img width="251" height="512" alt="image" src="https://github.com/user-attachments/assets/36d9ef67-6719-4eb0-90ad-a5ae1fc660c9" />
 
 ## Table of Contents
 
