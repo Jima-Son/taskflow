@@ -12,7 +12,6 @@ const AMBIENT_TRACKS = [
     { id: 'none',            label: 'Off' },
     { id: 'forest',          label: 'Forest',            file: 'audio/forest.mp3' },
     { id: 'waterfall-birds', label: 'Waterfall & Birds', file: 'audio/waterfall-birds.mp3' },
-    { id: 'waterfall',       label: 'Waterfall',         file: 'audio/waterfall.mp3' },
     { id: 'wind',            label: 'Wind',              file: 'audio/wind.mp3' },
     { id: 'cafe',            label: 'Cafe',              file: 'audio/cafe.mp3' },
     { id: 'kora',            label: 'Kora (strings)',    file: 'audio/kora.mp3' },
