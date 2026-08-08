@@ -6,7 +6,9 @@ I originally built this to keep my own list straight — I'm ADHD and a plain to
 
 ## Live Demo
 
-[View Live Demo](#) 
+[View Live Demo](https://jima-son.github.io/taskflow/) 
+<img width="464" height="307" alt="image" src="https://github.com/user-attachments/assets/00f7ba9e-51ec-43eb-86cc-df7748e3fbd7" />
+<img width="470" height="377" alt="image" src="https://github.com/user-attachments/assets/c5c6e905-4125-4a6d-9e00-af19ae659add" />
 
 ## Table of Contents
 
