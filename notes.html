@@ -1,0 +1,101 @@
+<!--
+Author: Sonia Amanyi
+Purpose: Notes tab — dictate or type notes tied to your tasks.
+         Voice-to-text and read-aloud both run on the browser's built-in
+         Web Speech API — free, no external API key or cost.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow — Notes</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/focus.css">
+    <link rel="stylesheet" href="css/notes.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <div class="logo-section">
+                    <i class="fas fa-layer-group"></i>
+                    <h1>TaskFlow</h1>
+                </div>
+                <nav class="app-nav" id="appNav">
+                    <a href="index.html"><i class="fas fa-list-check"></i> Tasks</a>
+                    <a href="focus.html"><i class="fas fa-clock"></i> Focus</a>
+                    <a href="notes.html" class="active"><i class="fas fa-microphone"></i> Notes</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+                    <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="notes-layout">
+            <section class="note-composer">
+                <div class="composer-top">
+                    <label for="noteTaskSelect">Attach to task (optional)</label>
+                    <select id="noteTaskSelect">
+                        <option value="">No task</option>
+                    </select>
+                </div>
+
+                <textarea id="noteText" rows="5" placeholder="Type a note, or press the mic to dictate..."></textarea>
+
+                <div class="composer-actions">
+                    <button class="btn btn-secondary" id="micBtn">
+                        <i class="fas fa-microphone"></i> Dictate
+                    </button>
+                    <button class="btn btn-primary" id="saveNoteBtn">
+                        <i class="fas fa-save"></i> Save note
+                    </button>
+                </div>
+                <div class="mic-status" id="micStatus"></div>
+                <div class="speech-unsupported" id="speechUnsupported" style="display:none;">
+                    Voice dictation isn't supported in this browser. Chrome or Edge work best. Typing still works fine.
+                </div>
+            </section>
+
+            <section class="notes-list-wrap">
+                <div class="notes-list-head">
+                    <h2>Your notes</h2>
+                    <span class="note-count" id="noteCount"></span>
+                </div>
+                <div id="notesList" class="notes-list"></div>
+                <div class="empty" id="notesEmpty" style="display:none;">
+                    <strong>No notes yet</strong>
+                    Type or dictate your first one above.
+                </div>
+            </section>
+        </main>
+
+        <!-- Premium unlock card -->
+        <div class="premium-card" id="premiumCard">
+            <div class="premium-info">
+                <i class="fas fa-star"></i>
+                <div>
+                    <strong>Read-aloud &amp; unlimited notes</strong>
+                    <p>Free tier keeps your last 10 notes and text-only. This is a placeholder gate for now — no real charge, just support-the-project framing until (if) a real payment flow gets wired in.</p>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="unlockBtn">Unlock (free preview)</button>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/notes.js"></script>
+</body>
+</html>

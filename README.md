@@ -6,9 +6,7 @@ I originally built this to keep my own list straight — I'm ADHD and a plain to
 
 ## Live Demo
 
-[View Live Demo](https://jima-son.github.io/taskflow/) 
-<img width="464" height="307" alt="image" src="https://github.com/user-attachments/assets/00f7ba9e-51ec-43eb-86cc-df7748e3fbd7" />
-<img width="470" height="377" alt="image" src="https://github.com/user-attachments/assets/c5c6e905-4125-4a6d-9e00-af19ae659add" />
+[View Live Demo](#) 
 
 ## Table of Contents
 
@@ -797,7 +795,7 @@ SOFTWARE.
 - **Files**: 6 (HTML, CSS, JS)
 - **External Dependencies**: 4 (all via CDN)
 - **Browser Support**: Modern browsers (ES6+)
-- **Development Time**: 4-8 days
+- **Development Time**: 3-5 days
 - **Status**: ✅ Production Ready
 
 ---
@@ -806,4 +804,4 @@ SOFTWARE.
 
 ---
 
-*Last Updated: july 2026*
+*Last Updated: January 2026*
