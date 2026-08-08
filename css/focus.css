@@ -1,0 +1,281 @@
+/* ================================
+   Focus Page — built on top of TaskFlow's existing tokens
+   ================================ */
+
+.app-nav {
+    display: flex;
+    gap: var(--spacing-md);
+}
+.app-nav a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition-fast);
+}
+.app-nav a:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+.app-nav a.active { color: var(--color-bg-secondary); background: var(--color-accent-primary); }
+
+.focus-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: var(--spacing-xl);
+    align-items: start;
+    padding-top: var(--spacing-lg);
+}
+@media (max-width: 860px) {
+    .focus-layout { grid-template-columns: 1fr; }
+}
+
+.focus-main {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.mode-switch {
+    display: flex;
+    gap: 4px;
+    background: var(--color-bg-tertiary);
+    padding: 4px;
+    border-radius: var(--radius-sm);
+}
+.mode-btn {
+    border: none;
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.mode-btn.active {
+    background: var(--color-bg-secondary);
+    color: var(--color-accent-primary);
+    font-weight: 600;
+}
+
+.timer-ring-wrap {
+    position: relative;
+    width: 280px;
+    height: 280px;
+}
+.timer-ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-track {
+    fill: none;
+    stroke: var(--color-bg-tertiary);
+    stroke-width: 10;
+}
+.ring-progress {
+    fill: none;
+    stroke: var(--color-accent-primary);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 816.8;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+.timer-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.timer-display {
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+}
+.timer-task {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-tertiary);
+    margin-top: 6px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.timer-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+.btn-lg { padding: 14px 32px; font-size: 1rem; }
+
+.session-dots {
+    display: flex;
+    gap: 8px;
+}
+.session-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--color-bg-tertiary);
+    transition: var(--transition-fast);
+}
+.session-dot.done { background: var(--color-accent-primary); }
+
+.task-picker, .ambient-panel {
+    width: 100%;
+    max-width: 380px;
+}
+.task-picker label, .ambient-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+#focusTaskSelect {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+}
+
+.ambient-panel { margin-top: var(--spacing-sm); }
+.ambient-options {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+.ambient-btn {
+    flex: 1;
+    padding: 8px 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.ambient-btn.active {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: rgba(217, 119, 6, 0.08);
+}
+#ambientVolume { width: 100%; accent-color: var(--color-accent-primary); }
+
+.focus-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+.side-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+}
+.side-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+}
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+    gap: var(--spacing-sm);
+}
+.setting-row label {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+}
+.setting-row input {
+    width: 64px;
+    padding: 6px 8px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    text-align: center;
+}
+
+.report-stats {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+.report-stat { flex: 1; text-align: center; }
+.report-num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+}
+.report-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+}
+.week-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 70px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 10px;
+}
+.week-bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end;
+}
+.week-bar {
+    width: 100%;
+    background: var(--color-accent-secondary);
+    border-radius: 2px 2px 0 0;
+    min-height: 2px;
+    transition: height 0.4s ease;
+}
+.week-bar-day {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--color-text-tertiary);
+}
+
+/* Break mode tint */
+body.mode-short .ring-progress, body.mode-long .ring-progress { stroke: var(--color-accent-secondary); }
