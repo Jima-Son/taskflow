@@ -27,6 +27,19 @@ Purpose: This is the main HTML file for the TaskFlow application, a modern task 
     <link rel="stylesheet" href="css/focus.css">
 </head>
 <body>
+    <!-- Applies the saved theme before first paint so there's no flash
+         of the default light theme while the rest of the JS loads. -->
+    <script>
+    (function() {
+        try {
+            var raw = localStorage.getItem('taskflow_settings');
+            var theme = raw ? (JSON.parse(raw).theme || 'light') : 'light';
+            if (theme === 'dark') document.body.classList.add('dark-theme');
+            else if (theme === 'soft') document.body.classList.add('soft-theme');
+        } catch (e) {}
+    })();
+    </script>
+
     <!-- Particles Background -->
     <div id="particles-js"></div>
 
@@ -39,6 +52,7 @@ Purpose: This is the main HTML file for the TaskFlow application, a modern task 
                     <h1>TaskFlow</h1>
                 </div>
                 <nav class="app-nav" id="appNav">
+                    <a href="dashboard.html"><i class="fas fa-house"></i> Home</a>
                     <a href="index.html" class="active"><i class="fas fa-list-check"></i> Tasks</a>
                     <a href="focus.html"><i class="fas fa-clock"></i> Focus</a>
                     <a href="notes.html"><i class="fas fa-microphone"></i> Notes</a>

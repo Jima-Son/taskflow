@@ -1,4 +1,14 @@
 /* ================================
+   Cross-page transitions
+   Native browser feature — smooth cross-fade when navigating between
+   TaskFlow's pages (Chrome/Edge 126+, Safari 18.2+). No JS needed;
+   browsers without support just navigate normally, nothing breaks.
+   ================================ */
+@view-transition {
+    navigation: auto;
+}
+
+/* ================================
    CSS Variables & Theme Configuration
    ================================ */
 :root {
@@ -60,6 +70,30 @@ body.dark-theme {
     --color-border: #4a4340;
     --color-shadow: rgba(0, 0, 0, 0.3);
     --color-overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* Solid Theme — flat, calm, single-color background. No particles,
+   no warm/amber accents; a plain neutral surface for anyone who
+   finds the default palette too busy. */
+body.soft-theme {
+    --color-bg-primary: #eef1f6;
+    --color-bg-secondary: #ffffff;
+    --color-bg-tertiary: #e2e6ee;
+    --color-text-primary: #2b2f3a;
+    --color-text-secondary: #5b6270;
+    --color-text-tertiary: #8b93a3;
+
+    --color-accent-primary: #6366f1;   /* Indigo */
+    --color-accent-secondary: #14b8a6; /* Teal */
+    --color-accent-tertiary: #f43f5e;  /* Rose */
+
+    --color-border: #d8dce4;
+    --color-shadow: rgba(43, 47, 58, 0.08);
+    --color-overlay: rgba(43, 47, 58, 0.55);
+}
+
+body.soft-theme #particles-js {
+    display: none;
 }
 
 /* ================================

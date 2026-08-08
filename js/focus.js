@@ -299,7 +299,7 @@ const FocusController = {
 
         document.getElementById('themeToggle').addEventListener('click', () => {
             const settings = StorageManager.getSettings();
-            settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
+            settings.theme = UIManager.nextTheme(settings.theme);
             StorageManager.saveSettings(settings);
             UIManager.applyTheme(settings.theme);
         });

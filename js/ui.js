@@ -297,13 +297,42 @@ const UIManager = {
      * Apply theme
      * @param {string} theme - 'light' or 'dark'
      */
+    /**
+     * Ordered list of themes the toggle button cycles through.
+     * 'soft' is the flat/solid-color theme (no particles, no amber accent).
+     */
+    THEME_CYCLE: ['light', 'dark', 'soft'],
+
+    /**
+     * Get the next theme in the cycle after the current one.
+     * @param {string} current - Current theme id
+     * @returns {string} - Next theme id
+     */
+    nextTheme(current) {
+        const idx = this.THEME_CYCLE.indexOf(current);
+        return this.THEME_CYCLE[(idx + 1) % this.THEME_CYCLE.length];
+    },
+
     applyTheme(theme) {
+        document.body.classList.remove('dark-theme', 'soft-theme');
+
+        const icon = document.querySelector('#themeToggle i');
+        const toggleBtn = document.getElementById('themeToggle');
+        const labels = { light: 'Light', dark: 'Dark', soft: 'Solid' };
+
         if (theme === 'dark') {
             document.body.classList.add('dark-theme');
-            document.querySelector('#themeToggle i').className = 'fas fa-sun';
+            if (icon) icon.className = 'fas fa-sun';
+        } else if (theme === 'soft') {
+            document.body.classList.add('soft-theme');
+            if (icon) icon.className = 'fas fa-circle-half-stroke';
         } else {
-            document.body.classList.remove('dark-theme');
-            document.querySelector('#themeToggle i').className = 'fas fa-moon';
+            if (icon) icon.className = 'fas fa-moon';
+        }
+
+        if (toggleBtn) {
+            const next = this.nextTheme(theme);
+            toggleBtn.title = `Switch to ${labels[next]} theme`;
         }
     },
 

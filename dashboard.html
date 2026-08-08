@@ -1,0 +1,109 @@
+<!--
+Author: Sonia Amanyi
+Purpose: Home / Dashboard — a snapshot of today's tasks, today's focus time,
+         and the latest note, so you don't have to check three separate pages.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow — Home</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/focus.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Applies the saved theme before first paint so there's no flash
+         of the default light theme while the rest of the JS loads. -->
+    <script>
+    (function() {
+        try {
+            var raw = localStorage.getItem('taskflow_settings');
+            var theme = raw ? (JSON.parse(raw).theme || 'light') : 'light';
+            if (theme === 'dark') document.body.classList.add('dark-theme');
+            else if (theme === 'soft') document.body.classList.add('soft-theme');
+        } catch (e) {}
+    })();
+    </script>
+
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <div class="logo-section">
+                    <i class="fas fa-layer-group"></i>
+                    <h1>TaskFlow</h1>
+                </div>
+                <nav class="app-nav" id="appNav">
+                    <a href="dashboard.html" class="active"><i class="fas fa-house"></i> Home</a>
+                    <a href="index.html"><i class="fas fa-list-check"></i> Tasks</a>
+                    <a href="focus.html"><i class="fas fa-clock"></i> Focus</a>
+                    <a href="notes.html"><i class="fas fa-microphone"></i> Notes</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+                    <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h2 class="dash-greeting" id="dashGreeting">Welcome back</h2>
+
+            <div class="dashboard-grid">
+                <!-- Today's Tasks -->
+                <section class="side-card dash-card">
+                    <h3><i class="fas fa-list-check"></i> Today's Tasks</h3>
+                    <div id="dashTasksList" class="dash-tasks-list"></div>
+                    <a href="index.html" class="dash-link">View all tasks <i class="fas fa-arrow-right"></i></a>
+                </section>
+
+                <!-- Today's Focus -->
+                <section class="side-card dash-card">
+                    <h3><i class="fas fa-clock"></i> Today's Focus</h3>
+                    <div class="report-stats dash-focus-stats">
+                        <div class="report-stat">
+                            <div class="report-num" id="dashFocusMinutes">0m</div>
+                            <div class="report-label">Minutes</div>
+                        </div>
+                        <div class="report-stat">
+                            <div class="report-num" id="dashFocusSessions">0</div>
+                            <div class="report-label">Sessions</div>
+                        </div>
+                    </div>
+                    <a href="focus.html" class="dash-link">Go to Focus <i class="fas fa-arrow-right"></i></a>
+                </section>
+
+                <!-- Latest Note -->
+                <section class="side-card dash-card">
+                    <h3><i class="fas fa-microphone"></i> Latest Note</h3>
+                    <div id="dashLatestNote" class="dash-note-preview"></div>
+                    <a href="notes.html" class="dash-link">Go to Notes <i class="fas fa-arrow-right"></i></a>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+
+    <footer class="site-footer">
+    <p>
+        © 2026 Sonia Amanyi · TaskFlow ·
+        <a href="https://github.com/Jima-Son" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> @Jima-Son
+        </a>
+    </p>
+</footer>
+</body>
+</html>

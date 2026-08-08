@@ -21,6 +21,19 @@ Purpose: Focus mode — a pomodoro-style timer built on top of TaskFlow's task l
     <link rel="stylesheet" href="css/focus.css">
 </head>
 <body>
+    <!-- Applies the saved theme before first paint so there's no flash
+         of the default light theme while the rest of the JS loads. -->
+    <script>
+    (function() {
+        try {
+            var raw = localStorage.getItem('taskflow_settings');
+            var theme = raw ? (JSON.parse(raw).theme || 'light') : 'light';
+            if (theme === 'dark') document.body.classList.add('dark-theme');
+            else if (theme === 'soft') document.body.classList.add('soft-theme');
+        } catch (e) {}
+    })();
+    </script>
+
     <div class="container">
         <header class="header">
             <div class="header-top">
@@ -29,6 +42,7 @@ Purpose: Focus mode — a pomodoro-style timer built on top of TaskFlow's task l
                     <h1>TaskFlow</h1>
                 </div>
                 <nav class="app-nav" id="appNav">
+                    <a href="dashboard.html"><i class="fas fa-house"></i> Home</a>
                     <a href="index.html"><i class="fas fa-list-check"></i> Tasks</a>
                     <a href="focus.html" class="active"><i class="fas fa-clock"></i> Focus</a>
                     <a href="notes.html"><i class="fas fa-microphone"></i> Notes</a>
@@ -127,12 +141,6 @@ Purpose: Focus mode — a pomodoro-style timer built on top of TaskFlow's task l
     </div>
 
     <audio id="alarmSound" src="audio/alarm.mp3" preload="auto"></audio>
-
-    <div class="session-toast" id="sessionToast">
-        <i class="fas fa-circle-check"></i>
-        <span class="toast-message"></span>
-        <button class="toast-close" id="toastClose" aria-label="Dismiss"><i class="fas fa-times"></i></button>
-    </div>
 
     <script src="js/storage.js"></script>
     <script src="js/ui.js"></script>

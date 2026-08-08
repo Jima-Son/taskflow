@@ -486,13 +486,14 @@ const AppController = {
      */
     toggleTheme() {
         const currentTheme = this.state.settings.theme;
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        const newTheme = UIManager.nextTheme(currentTheme);
         
         StorageManager.updateSetting('theme', newTheme);
         this.state.settings.theme = newTheme;
         UIManager.applyTheme(newTheme);
         
-        UIManager.showNotification(`${newTheme === 'dark' ? 'Dark' : 'Light'} theme activated`, 'success');
+        const labels = { light: 'Light', dark: 'Dark', soft: 'Solid' };
+        UIManager.showNotification(`${labels[newTheme]} theme activated`, 'success');
     },
 
     /**
