@@ -29,6 +29,14 @@ const AmbientSound = {
 
     stop() {
         if (this.audioEl) {
+            // Remove the error listener BEFORE clearing src. Setting src=''
+            // on a playing/loading <audio> element fires a spurious 'error'
+            // event in most browsers, which would otherwise trigger the
+            // synthesized fallback tone even though we're intentionally
+            // stopping playback (this was the "phantom waterfall" bug).
+            if (this.audioEl._errorHandler) {
+                this.audioEl.removeEventListener('error', this.audioEl._errorHandler);
+            }
             this.audioEl.pause();
             this.audioEl.src = '';
             this.audioEl = null;
@@ -57,10 +65,15 @@ const AmbientSound = {
         audio.loop = true;
         audio.volume = volume;
 
-        audio.addEventListener('error', () => {
+        const errorHandler = () => {
             console.warn(`Ambient track "${id}" failed to load — falling back to a generated tone.`);
             this._playFallback(volume);
-        });
+        };
+        audio.addEventListener('error', errorHandler);
+        // Stash the handler on the element itself so stop() can remove
+        // this exact listener later (addEventListener callbacks can't be
+        // removed unless you keep a reference to them).
+        audio._errorHandler = errorHandler;
 
         audio.play().catch(() => {
             // Autoplay can be blocked until a user gesture; the Start button click covers this in practice
