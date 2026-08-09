@@ -111,13 +111,8 @@ const DashboardController = {
             StorageManager.saveSettings(settings);
             UIManager.applyTheme(settings.theme);
         });
-
-        const navToggle = document.getElementById('navToggle');
-        if (navToggle) {
-            navToggle.addEventListener('click', () => {
-                document.getElementById('appNav').classList.toggle('open');
-            });
-        }
+        // Note: the mobile nav-toggle button doesn't need a handler here —
+        // ui.js registers one shared listener for it on every page.
     }
 };
 
